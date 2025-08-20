@@ -9,6 +9,7 @@
 - [SQL Queries & Analytics Tasks](#sql-queries--analytics-tasks)
 - [Key Insights / Business Value](#key-insights--business-value)
 - [How to Reproduce / Run the Project](#how-to-reproduce--run-the-project)
+- [Data Dictionary](#data-dictionary)
 - [Conclusion / Next Steps](#conclusion--next-steps)
 
 ---
@@ -153,6 +154,13 @@ All queries are executed on the **gold layer** (enriched and business-ready data
 6. Visualize outputs in your preferred BI tool or Excel.  
 
 > **Note:** All scripts include logging, error handling, and batch timing for reproducibility and monitoring.
+
+---
+
+## Data Dictionary
+The full **data dictionary** describing tables, views, columns, and business definitions for the **gold layer** is available here:  
+
+📄 [Data Dictionary (docs/docs.catalog.md)](docs/docs.catalog.md)
 
 ---
 
