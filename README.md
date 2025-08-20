@@ -88,7 +88,8 @@ The project follows the **Bronze → Silver → Gold (BSG) Medallion Architectur
   - Ad-hoc SQL analysis  
   - Machine learning models  
 
-**Visual Placeholder:** Add ER diagrams, flowcharts, or pipeline screenshots here.
+**Visual Architecture Diagram:**  
+![Data Warehouse Architecture](docs/data_architecture.png)
 
 ---
 
