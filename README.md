@@ -158,9 +158,45 @@ All queries are executed on the **gold layer** (enriched and business-ready data
 ---
 
 ## Data Dictionary
-The full **data dictionary** describing tables, views, columns, and business definitions for the **gold layer** is available here:  
 
-📄 [Data Dictionary (docs/docs.catalog.md)](docs/docs.catalog.md)
+### 🔹 View: `gold.train_with_stores`
+
+| Column Name             | Data Type | Description                                         |
+|-------------------------|-----------|-----------------------------------------------------|
+| store_id                | INT       | Unique identifier for each store                    |
+| department              | INT       | Department number                                   |
+| date                    | DATE      | Week date                                          |
+| weekly_sales            | FLOAT     | Total weekly sales for the store & department      |
+| returns                 | FLOAT     | Number of items returned                           |
+| train_is_holiday        | BIT       | Holiday flag from train table                       |
+| train_holiday_status    | NVARCHAR  | Holiday description from train table               |
+| store_type              | NVARCHAR  | Store type from silver.stores                       |
+| store_size              | INT       | Store size from silver.stores                       |
+
+### 🔹 View: `gold.train_with_stores_and_features`
+
+| Column Name               | Data Type | Description                                           |
+|---------------------------|-----------|-------------------------------------------------------|
+| store_id                  | INT       | Unique identifier for each store                      |
+| department                | INT       | Department number                                     |
+| date                      | DATE      | Week date                                            |
+| weekly_sales              | FLOAT     | Total weekly sales for the store & department        |
+| returns                   | FLOAT     | Number of items returned                             |
+| train_is_holiday          | BIT       | Holiday flag from train table                         |
+| train_holiday_status      | NVARCHAR  | Holiday description from train table                 |
+| store_type                | NVARCHAR  | Store type from silver.stores                         |
+| store_size                | INT       | Store size from silver.stores                         |
+| temperature               | FLOAT     | Daily temperature from features table                |
+| fuel_price                | FLOAT     | Fuel price from features table                        |
+| mark_down1                | FLOAT     | Promotional markdown 1                                |
+| mark_down2                | FLOAT     | Promotional markdown 2                                |
+| mark_down3                | FLOAT     | Promotional markdown 3                                |
+| mark_down4                | FLOAT     | Promotional markdown 4                                |
+| mark_down5                | FLOAT     | Promotional markdown 5                                |
+| consumer_price_index      | FLOAT     | CPI indicator                                         |
+| unemployment              | FLOAT     | Unemployment rate                                     |
+| features_is_holiday       | BIT       | Holiday flag from features table                      |
+| features_holiday_status   | NVARCHAR  | Holiday description from features table              |
 
 ---
 
