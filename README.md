@@ -1,9 +1,11 @@
-# Walmart Data Warehouse & Analytics Project
+# 🛒 Walmart Data Warehouse & Analytics Project
 
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Dataset Information](#dataset-information)
+- [Requirements Analysis](#requirements-analysis)
 - [Data Warehouse Architecture](#data-warehouse-architecture)
+- [Project Initialization](#project-initialization)
 - [SQL Queries & Analytics Tasks](#sql-queries--analytics-tasks)
 - [Key Insights / Business Value](#key-insights--business-value)
 - [How to Reproduce / Run the Project](#how-to-reproduce--run-the-project)
@@ -16,25 +18,39 @@ This project demonstrates a comprehensive SQL Server-based data warehouse and an
 
 The goal is twofold:
 
-**Technical Excellence:** Highlight the design and implementation of a robust data warehouse, including schema design, medallion architecture, ETL workflows, and advanced SQL techniques such as CTEs, window functions, and aggregations.
+**Technical Excellence:** Highlight the design and implementation of a robust data warehouse, including schema design, medallion architecture, ETL workflows, and advanced SQL techniques such as CTEs, window functions, and aggregations.  
 
-**Business Value:** Provide actionable insights into sales trends, store performance, department-level contributions, and the impact of promotions, holidays, and economic indicators on consumer behavior.
+**Business Value:** Provide actionable insights into sales trends, store performance, department-level contributions, and the impact of promotions, holidays, and economic indicators on consumer behavior.  
 
 This repository is intended as a **portfolio-ready showcase** for employers and developers.
 
 ---
 
 ## Dataset Information
-**Source:** CSV files containing historical Walmart store sales, store information, and external contextual data (weather, fuel prices, CPI, etc.)
+The datasets used in this project were obtained from **Kaggle**. They contain Walmart’s recruiting store sales forecasting data, including historical sales, markdown events, holiday indicators, and store metadata.  
+
+**Source:** [Walmart Recruiting - Store Sales Forecasting (Kaggle Competition)](https://www.kaggle.com/competitions/walmart-recruiting-store-sales-forecasting)  
+CSV files containing historical Walmart store sales, store information, and external contextual data (weather, fuel prices, CPI, etc.)  
 
 **Tables:**
-- **Stores:** Store-level metadata including type and size.
-- **Features:** Contextual data for each store-date combination.
-- **Train:** Historical weekly sales and returns.
-- **Test:** Future week combinations for predictions.
-- **Sample Submission:** Template for sales forecasts.
+- **Stores:** Store-level metadata including type and size.  
+- **Features:** Contextual data for each store-date combination.  
+- **Train:** Historical weekly sales and returns.  
+- **Test:** Future week combinations for predictions.  
+- **Sample Submission:** Template for sales forecasts.  
 
 **Time Period:** Historical coverage spanning multiple years, enabling trend and seasonality analysis.
+
+---
+
+## Requirements Analysis
+This phase focuses on aligning the warehouse with Walmart’s sales analytics needs.  
+
+- **Data Sources:** Historical CSV files covering sales, store metadata, and external contextual factors (fuel, CPI, holidays, etc.).  
+- **Data Quality:** Ensure removal of duplicates, handling of nulls, and consistent data formats.  
+- **Data Integration:** Merge sales, promotions, and contextual features into unified analytical layers.  
+- **Scope:** Cover multiple years of weekly sales to enable trend, seasonality, and holiday analysis.  
+- **Documentation:** Provide clear instructions for ETL, schema design, and query usage for reproducibility.  
 
 ---
 
@@ -44,31 +60,46 @@ The project follows the **Bronze → Silver → Gold (BSG) Medallion Architectur
 ### 🔹 Sources
 - CSV files ingested directly into SQL Server.
 
-### 🔹 Bronze Layer (Raw Data)
+### 🔹 Bronze Layer – Raw Ingestion
 - **Object Type:** Tables  
-- **Load Method:** SSMS import of flat files  
-- **Transformations:** None  
-- **Purpose:** Store raw, unprocessed data exactly as received  
+- **Load Method:** SSMS import of flat files (no bulk insert).  
+- **Purpose:** Store raw, unprocessed data exactly as received for traceability.  
 
-### 🔹 Silver Layer (Cleaned, Standardized Data)
+### 🔹 Silver Layer – Cleansed & Enriched
 - **Object Type:** Tables  
 - **Load Method:** Batch processing with truncate & insert  
-- **Transformations:** Data cleaning, normalization, derived columns, enrichment  
-- **Purpose:** Standardized, reliable version of raw data  
+- **Processes:**  
+  - Data cleaning, normalization, type conversions  
+  - Null handling and removal of duplicates  
+  - Derived columns (e.g., standardized timestamps, enriched attributes)  
+- **Purpose:** Provide a reliable, analytics-ready version of raw data  
 
-### 🔹 Gold Layer (Business-Related Data)
+### 🔹 Gold Layer – Business-Ready Data
 - **Object Type:** Views and aggregated tables  
 - **Load Method:** Populated from Silver tables  
-- **Transformations:** Integrations, aggregations, business logic  
-- **Purpose:** Analytics-ready, business-friendly data  
+- **Processes:**  
+  - Joins, aggregations, business logic  
+  - KPI calculations such as store performance, holiday uplift, and markdown effects  
+- **Purpose:** Serve reporting tools and analytical queries  
 
 ### 🔹 Consumption Layer
-- **Used by:**
-  - BI dashboards
-  - Ad-hoc SQL queries
-  - Machine learning models
+- **Used by:**  
+  - BI dashboards (Power BI, Tableau, Excel)  
+  - Ad-hoc SQL analysis  
+  - Machine learning models  
 
 **Visual Placeholder:** Add ER diagrams, flowcharts, or pipeline screenshots here.
+
+---
+
+## Project Initialization
+- **Task Management:** Project planning and tracking handled using Notion.  
+- **Naming Conventions:** Snake_case for tables and fields (e.g., `weekly_sales`, `store_id`).  
+- **Version Control:** GitHub repository used to track SQL scripts, ETL logic, and documentation.  
+- **Permissions & Environment Setup:**  
+  - SQL Server (Express or Developer Edition) used.  
+  - CSV files staged and imported using SSMS flat file import wizard.  
+  - Manual creation of schema layers (`bronze`, `silver`, `gold`) to separate responsibilities.  
 
 ---
 
@@ -108,13 +139,13 @@ All queries are executed on the **gold layer** (enriched and business-ready data
 - **Promotional Impact:** Markdown promotions can drive short-term sales spikes.  
 - **Store Segmentation:** High-performing stores contribute disproportionately to overall revenue, guiding targeted marketing and inventory planning.  
 - **Department Contributions:** Top departments generate most consistent revenue, helping prioritize stocking and promotions.  
-- **External Factors:** Fuel prices and CPI levels correlate with consumer spending patterns, providing context for strategic planning.
+- **External Factors:** Fuel prices and CPI levels correlate with consumer spending patterns, providing context for strategic planning.  
 
 ---
 
 ## How to Reproduce / Run the Project
 1. Setup SQL Server and create a database for Walmart analytics.  
-2. Ingest CSV files into bronze layer tables using SSMS or an ETL tool.  
+2. Ingest CSV files into bronze layer tables using SSMS flat file import.  
 3. Execute silver layer scripts to clean, standardize, and enrich data.  
 4. Populate gold layer views using the provided transformation scripts.  
 5. Run analytics queries to reproduce tables, trends, and insights as documented.  
@@ -128,4 +159,4 @@ All queries are executed on the **gold layer** (enriched and business-ready data
 - Extend analytics to predictive modeling for future sales forecasting.  
 - Integrate additional external features such as local events or competitor activity.  
 - Build interactive dashboards for real-time monitoring of store performance.  
-- Maintain modular ETL pipelines for ongoing data updates and scalability.
+- Maintain modular ETL pipelines for ongoing data updates and scalability.  
